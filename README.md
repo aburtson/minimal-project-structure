@@ -1,10 +1,11 @@
-<h1>simple project base</h1>
-<h3>This is a starter structure for a project using sass, jquery, and jquery touch events.</h3>
-<ul>
-<li>To start a project navigate to the folder with gulpFile within using your terminal and type in (gulp) to start 
-your server and watch your files. Then go to localhost:3000 in your browser of choice to view your project live.</li>
-<li>To remove files and folder made by gulp navigate to the folder with gulpFile within using your terminal and type 
-in (gulp clean).</li>
-<li>To make a dist folder with the minified version of your code navigate to the folder with gulpFile within using
-your terminal and type in (gulp build).</li>
-</ul>
+#minimal project structure
+##This is a starter structure for a project using sass and jquery
+
+To start a project:
+
+ - run npm install to get required dependences 
+ - Navigate to the folder with gulpFile within using your terminal and type in (gulp) to start 
+your server and watch your files.
+ - To remove files and folders made by gulp navigate to the folder with gulpFile within using your terminal and run (gulp clean).
+ - To make a dist folder with the minified version of your code navigate to the folder with gulpFile within using
+your terminal run (gulp build).
