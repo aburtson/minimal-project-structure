@@ -1,25 +1,20 @@
 'use strict';
 
-const gulp =    require('gulp');
-const concat =  require('gulp-concat'); //used for concatinating js files
-const uglify =  require('gulp-uglify'); //used to minify js files
-const rename =  require('gulp-rename'); //used to rename files
-const sass =    require('gulp-sass');	//used to compile sass
-const maps =    require('gulp-sourcemaps'); //used to make sourcemaps files for js, css, scss,less
-const cssnano = require('gulp-cssnano'); // used to minify css
-const del =     require('del'); // used to delete files for clean up
-const autoprefixer = require('gulp-autoprefixer'); //used to auto add vendor prefixes to css
-const browserSync =  require('browser-sync'); //reloads browser after saving a change to a file
-const prettify =     require('gulp-prettify'); //properly indents html files
-const plumber = 	   require('gulp-plumber'); //error handler for gulp
+const gulp 		   = require('gulp');
+const concat 	   = require('gulp-concat'); 		// concatenates js
+const uglify       = require('gulp-uglify'); 		// minifies js
+const rename       = require('gulp-rename'); 		// renames files
+const sass         = require('gulp-sass');			// compiles sass
+const maps         = require('gulp-sourcemaps'); 	// makes sourcemaps for js, css, scss,less
+const cssnano      = require('gulp-cssnano'); 		// minifies css
+const del          = require('del'); 				// deletes files for clean up
+const autoprefixer = require('gulp-autoprefixer');  // auto-adds vendor prefixes to css
+const browserSync  = require('browser-sync'); 		// reloads browser after changing a file
+const prettify     = require('gulp-prettify'); 		// indents html files properly
+const plumber      = require('gulp-plumber'); 		// handles gulp errors
 
-// js files to be concatinated in this order
-var vendorScripts = [
-	'node_modules/jquery/dist/jquery.min.js'
-		];
-var mainScripts = [
-	'./src/assets/js/main/main.js'];
-
+var vendorScripts = [ 'node_modules/jquery/dist/jquery.min.js' ];
+var mainScripts = [ './src/assets/js/main/main.js' ];
 
 // prettifies html and places it in dist
 gulp.task('get_html', function() {
@@ -30,7 +25,7 @@ gulp.task('get_html', function() {
 	.pipe(browserSync.stream());
 });
 
-// prettifies html and places it in dist
+// prettifies js and places it in dist
 gulp.task('get_scripts', function() {
 	return gulp.src(vendorScripts)
 	.pipe(plumber())

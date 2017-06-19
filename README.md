@@ -3,7 +3,7 @@
 
 To start a project:
 
- - run npm install to get required dependences 
+ - run npm install to get required dependencies 
  - Navigate to the folder with gulpFile within using your terminal and type in (gulp) to start 
 your server and watch your files.
  - To remove files and folders made by gulp navigate to the folder with gulpFile within using your terminal and run (gulp clean).
