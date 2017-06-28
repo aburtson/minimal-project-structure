@@ -1,6 +1,6 @@
 'use strict';
 
-const gulp 		   = require('gulp');
+const gulp 		   = require('gulp');				// gulp!
 const concat 	   = require('gulp-concat'); 		// concatenates js
 const uglify       = require('gulp-uglify'); 		// minifies js
 const rename       = require('gulp-rename'); 		// renames files
@@ -16,98 +16,82 @@ const plumber      = require('gulp-plumber'); 		// handles gulp errors
 var vendorScripts = [ 'node_modules/jquery/dist/jquery.min.js' ];
 var mainScripts = [ './src/assets/js/main/main.js' ];
 
-// prettifies html and places it in dist
-gulp.task('get_html', function() {
+// prettify html and place in dist
+gulp.task('getHtml', function() {
 	return gulp.src('src/views/**/*.html')
 	.pipe(plumber())
 	.pipe(prettify())
-	.pipe(gulp.dest('./dist')) // output the rendered HTML files to the "dist" directory
+	.pipe(gulp.dest('./dist')) // output rendered html into /dist
 	.pipe(browserSync.stream());
 });
 
-// prettifies js and places it in dist
-gulp.task('get_scripts', function() {
+// place js in dist
+gulp.task('getScripts', function() {
 	return gulp.src(vendorScripts)
 	.pipe(plumber())
-	.pipe(gulp.dest('./dist/assets/js/vendors')) // output the rendered HTML files to the "dist" directory
+	.pipe(gulp.dest('./dist/assets/js/vendors')) // output rendered html into /dist
 	.pipe(browserSync.stream());
 });
 
-// concatinates js from the scripts var into one file app.js,
-// and places the file in dist/js
+// concatenate js into dist/assets/js/app.js
 gulp.task('concatScripts', function() {
 	return gulp.src(mainScripts)
 	.pipe(maps.init())
-	.pipe(concat('app.js'))
-	.pipe(maps.write('./'))
-	.pipe(gulp.dest('./dist/assets/js'));
+	.pipe(concat('app.js'))					// concatenate js into app.js
+	.pipe(maps.write('./'))					// create source maps
+	.pipe(gulp.dest('./dist/assets/js'));	// place files in /dist/assets/js
 });
 
-
-// concatinates js from the scripts var into one file app.js,
-// minifys app.js into app.min.js,
-// then writes the source maps,
-// places both files in ./js,
-// and reloads the browser
+// concatenate and minify js into dist/assets/js/app.min.js
 gulp.task('minifyScripts', function() {
 	return gulp.src(mainScripts)
 	.pipe(plumber())
 	.pipe(maps.init())
-	.pipe(concat('app.js'))
-	.pipe(uglify())
-	.pipe(rename("app.min.js"))
-	.pipe(maps.write('./'))
-	.pipe(gulp.dest('./dist/assets/js'))
-	.pipe(browserSync.stream());
+	.pipe(concat('app.js')) 				// concatenate js into app.js
+	.pipe(uglify())							// minify app.js
+	.pipe(rename("app.min.js"))				// rename to app.min.js
+	.pipe(maps.write('./'))					// create source maps
+	.pipe(gulp.dest('./dist/assets/js'))	// place files in /dist/assets/js
+	.pipe(browserSync.stream());			// reload the browser
 });
 
-// compiles sass from scss/main.scss to main.css
-// adds prefixes with auto prefixer to css
-// writes source maps
-// places both in dist/css
+// compile sass into dist/assets/css/main.min.css
 gulp.task('compileSass', function() {
 	return gulp.src('src/assets/scss/main.scss')
 	.pipe(maps.init())
-	.pipe(sass())
-	.pipe(autoprefixer({browsers:['last 2 versions']}))
-	.pipe(maps.write('./'))
-	.pipe(gulp.dest('dist/assets/css'));
+	.pipe(sass())											// compile sass from scss/main.scss to main.css
+	.pipe(autoprefixer({browsers:['last 2 versions']}))		// add css prefixes
+	.pipe(maps.write('./'))									// write source maps
+	.pipe(gulp.dest('dist/assets/css'));					// place maps and css in /dist/assets/css
 });
 
-// compiles sass from scss/main.scss to main.css
-// adds prefixes with auto prefixer to css
-// minifies css to main.min.css
-// writes source maps
-// places both in dist/css
+// compile and minify sass into dist/assets/css/main.min.css
 gulp.task('minifyCss', function() {
 	return gulp.src('src/assets/scss/main.scss')
 	.pipe(plumber())
 	.pipe(maps.init())
-	.pipe(sass())
-	.pipe(autoprefixer({browsers:['last 5 versions', 'IE 9']}))
-	.pipe(cssnano())
-	.pipe(rename("main.min.css"))
-	.pipe(maps.write('./'))
-	.pipe(gulp.dest('./dist/assets/css'))
-	.pipe(browserSync.stream());
+	.pipe(sass())													// compile sass from scss/main.scss to main.css
+	.pipe(autoprefixer({browsers:['last 5 versions', 'IE 9']}))		// add css prefixes
+	.pipe(cssnano())												// minify css
+	.pipe(rename("main.min.css"))									// rename to main.min.css
+	.pipe(maps.write('./'))											// write source maps
+	.pipe(gulp.dest('./dist/assets/css'))							// place maps and min.css in /dist/assets/css
+	.pipe(browserSync.stream());									// reload the browser
 });
 
 
-// starts development server at localhost:3000
-// watches html, js, and scss and runs associated tasks
+// start dev server and watch files
 gulp.task('watchFiles',['build'], function() {
 	browserSync.init({
         server: "./dist"
     });
 	gulp.watch('./src/assets/scss/**/*.scss', ['minifyCss']);
 	gulp.watch('./src/assets/js/**/*.js', ['minifyScripts']);
-	gulp.watch('./src/views/**/*.html', ['get_html']);
+	gulp.watch('./src/views/**/*.html', ['getHtml']);
 });
 
-// builds the dist directory and by running associated tasks
-// that place their contents in dist, and by placing the folders and
-// files returned from gulp.src into dist
-gulp.task('build', ['get_html', 'get_scripts', 'minifyScripts', 'minifyCss','compileSass','concatScripts'], function() {
+// build dist directory and add all files for production
+gulp.task('build', ['getHtml', 'getScripts', 'minifyScripts', 'minifyCss','compileSass','concatScripts'], function() {
 	return gulp.src(["src/assets/img/**"], { base: './src'})
 	.pipe(gulp.dest('dist'));
 });
@@ -117,7 +101,7 @@ gulp.task('clean', function(){
 	del(['dist']);
 });
 
-// default task is set to start the watch listeners
+// default task: run watch listeners
 gulp.task('default', [], function() {
 	gulp.start(['watchFiles']);
 });
