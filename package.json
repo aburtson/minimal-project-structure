@@ -1,7 +1,7 @@
 {
   "name": "Minimal project structure",
   "version": "1.0.0",
-  "description": "Used for creating plugins",
+  "description": "A starter with SCSS and jQuery",
   "main": "index.js",
   "dependencies": {
     "express": "^4.13.4",

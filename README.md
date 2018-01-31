@@ -1,5 +1,5 @@
-#minimal project structure
-##This is a starter structure for a project using sass and jquery
+#Minimal project structure
+##This is a starter using SCSS and jQuery
 
 To start a project:
 
