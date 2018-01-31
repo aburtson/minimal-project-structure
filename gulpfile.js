@@ -14,7 +14,9 @@ const prettify     = require('gulp-prettify'); 		// indents html files properly
 const plumber      = require('gulp-plumber'); 		// handles gulp errors
 
 var vendorScripts = [ 'node_modules/jquery/dist/jquery.min.js' ];
-var mainScripts = [ './src/assets/js/main/main.js' ];
+var mainScripts = [
+	'./src/assets/js/main/main.js'
+];
 
 // prettify html and place in dist
 gulp.task('getHtml', function() {

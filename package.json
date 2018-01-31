@@ -1,7 +1,7 @@
 {
-  "name": "starter",
+  "name": "Minimal project structure",
   "version": "1.0.0",
-  "description": "this is a clone of the square website.",
+  "description": "Used for creating plugins",
   "main": "index.js",
   "dependencies": {
     "express": "^4.13.4",
@@ -26,6 +26,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Daniel Stephany",
+  "author": "Alex Burtson",
   "license": "ISC"
 }
