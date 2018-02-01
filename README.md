@@ -1,5 +1,6 @@
 # Minimal project structure
-## This is a starter using SCSS and jQuery
+
+This is a blank starter structure using SCSS and jQuery.
 
 To start a project:
 
